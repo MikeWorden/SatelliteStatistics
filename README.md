@@ -13,7 +13,7 @@ To use:
 
 1) Clone the repo to a local folder
 
-2) Create a virtual environment with at-leas Python 3.11
+2) Create a virtual environment with at-least Python 3.11
 
 3) Install necessary libraries (pip install -r requirements.txt)
 
