@@ -91,7 +91,7 @@ fig_country = px.bar(country_counts_top_ten,
                      template="plotly_dark")
 fig_country.update_layout(
         title={
-            'text': "Major Satellite Contractors by Country",
+            'text': "Top Ten Countries Launching Satellites",
             'y': 0.9,          # Vertical position (0 to 1)
             'x': 0.5,          # Horizontal position (0.5 is the middle)
             'xanchor': 'center',
@@ -112,7 +112,7 @@ fig_orbits = px.pie(orbit_counts,
                     template='plotly_dark')
 fig_orbits.update_layout(
         title={
-            'text': "Major Satellite Contractors by Country",
+            'text': "Satellite Launches by Orbit Type",
             'y': 0.9,          # Vertical position (0 to 1)
             'x': 0.5,          # Horizontal position (0.5 is the middle)
             'xanchor': 'center',
@@ -166,7 +166,7 @@ def update_figure(selected_year):
 
     fig.update_layout(
         title={
-            'text': "Major Satellite Contractors by Country",
+            'text': "Satellite Launches by Year ",
             'y': 0.9,          # Vertical position (0 to 1)
             'x': 0.5,          # Horizontal position (0.5 is the middle)
             'xanchor': 'center',
@@ -205,7 +205,7 @@ def update_chart(selected_country):
         values='Count', 
         names='Contractor', 
         labels={'Count': 'Number of Satellites'},
-        title=f"Major Satellite Contractors by Country",
+        title=f"Number of Satellites by Country",
         hole=0.3,
         template="plotly_dark"
     )
@@ -308,6 +308,8 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
+                    dcc.Markdown("""The United States is clearly a leader, primarily due to contributions from Small Sat operators 
+                                 including SpaceX which provides Starlink Internet  ."""),  
                     dcc.Graph(figure=fig_country) 
                 ])
             ], className="shadow-sm")
@@ -316,6 +318,8 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
+                    dcc.Markdown("""Low Earth Orbit (LEO) satellites orbit at Less than 2000 KM, while Medium Earth Orbit (MEO)
+                                 orbit at less than 35,000 KM, and Geosynchronous Earth Orbit (GEO) satellites operate at 35,786 KM"""),
                     dcc.Graph(figure=fig_orbits) 
                 ])
             ], className="shadow-sm")
@@ -325,6 +329,8 @@ app.layout = dbc.Container([
     # Show Bar Chart with dual slider
     dbc.Row([
     dbc.Col([
+        dcc.Markdown("""Since 2020, LEO satellite launches are greatly outpacing launches of MEO, GEO, or Elliptial orbit spacecraft.  
+                     This is due to technology advances that allow for multiple Small Satellite launches per launch vehicle"""),
         dcc.Graph(id='graph-with-slider',
                  style={'height': '450px'} ),
         html.Label("Select Year Range:"),
@@ -342,7 +348,8 @@ app.layout = dbc.Container([
     dbc.Row([
 
         dbc.Col([
-            
+            dcc.Markdown("""The increase in satellite launches has a corresponding increase in the number of companies 
+                         providing satellite services."""),
             html.Label(
                 "Select country:", 
                 className="fw-bold text-white fs-4"  
@@ -379,7 +386,7 @@ app.layout = dbc.Container([
         ], className="mb-3 text-dark"), 
     ]),
     dbc.Row([
-        
+        dcc.Markdown("""Most countries have a wide mix of commercial, government, and military missions."""),
         dbc.Col([
             dcc.Graph(id='contractor-mission-pie-chart')
         ])
